@@ -14,10 +14,20 @@ const app = express();
 const PORT = 8080
 
 // Connecting mongoose to the MongoDB
+mongoose.connect('mongodb://localhost/mongooseLoginRegistration', {useNewUrlParser: true, useUnifiedTopology: true})
 
 // Create Schema and models
+const UserSchema = new mongoose.Schema({
+   email:{type: String, required: true},
+   first_name:{type: String, required:true},
+   last_name:{type: String, required:true},
+   password:{type: String, required:true},
+   birthday:{type: Date, required:true}
+}, {timestamps: true})
+
 
 // Create Object of Models
+const User = mongoose.model('User', UserSchema)
 
 // Setting Express app to accept POST requests
 app.use( express.urlencoded({extended: true}) );
