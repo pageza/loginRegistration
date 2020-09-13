@@ -18,11 +18,11 @@ mongoose.connect('mongodb://localhost/mongooseLoginRegistration', {useNewUrlPars
 
 // Create Schema and models
 const UserSchema = new mongoose.Schema({
-   email:{type: String, required: true},
-   first_name:{type: String, required:true},
-   last_name:{type: String, required:true},
-   password:{type: String, required:true},
-   birthday:{type: Date, required:true}
+   email:{type: String, required: [true, 'Email is required'], match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, "email entered is not of a valid form"]},
+   first_name:{type: String, required:[true, 'A first name is required'], minlength:[2, 'First name must be at least 2 characters long']},
+   last_name:{type: String, required:[true, 'A last name is required'], minlength:[2, 'Last name must be at least 2 characters long']},
+   password:{type: String, required:[true, 'A password is required'], minlength: [8, 'Your password must be at least 8 characters long']},
+   birthday:{type: Date, required:[true, 'You must enter your birthdate']}
 }, {timestamps: true})
 
 
